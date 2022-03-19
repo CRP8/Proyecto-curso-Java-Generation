@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presupuesto</title>
+<link rel="stylesheet" href="css\bootstrap.min.css" />
+<link rel="stylesheet" href="css\estilo.css">
+<script src="js\jquery-3.6.0.min.js"></script>
+<script src="js\bootstrap.min.js"></script>
+<script src="js\popper.js"></script>
+<script src="https://kit.fontawesome.com/e22ea825df.js"
+	crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+	<div class="container-fluid px-0">
+		<nav class="navbar navbar-expand-lg navbar-dark menus">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/index"><img
+					src="./img/logoPagina.png" class="align-self-start mr-3"
+					height="50px" width="50px"></a> 
+				<a class="navbar-brand"
+					href="/index" style="font-weight: bold;">Nuevo Presupuesto</a>
+				<div class="collapse navbar-collapse ps-3"
+					id="navbarSupportedContent">
+					<ul class="navbar-nav">
+						<li class="nav-item dropdown pt-1 botonnav"><a
+							class="nav-item dropdown-toggle botonnav" href="#"
+							id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false">Presupuestos</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="/presupuestos">Presupuestos</a></li>
+								<li><a class="dropdown-item" href="/facturas">Facturas</a></li>
+								<li><a class="dropdown-item" href="/comerciales">Comerciales</a></li>
+								<li><a class="dropdown-item" href="/cliente">Clientes</a></li>
+								<li><a class="dropdown-item" href="/actividades">Actividades</a></li>
+							</ul></li>
+							</ul>
+				</div>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link" href="#"> <i
+								class="fas fa-comments"></i> <span
+								class="badge badge-pill badge-info"
+								style="background-color: #138496; font-size: 9px; border-radius: 0.40rem; position: absolute;">1</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="#"> <i
+								class="far fa-clock"></i>
+						</a></li>
+						<li class="nav-item pt-2 "><a class="nav-item icono"
+							href="/ajustes" id="navbarSettings" role="button"><i
+								class="fas fa-tools" aria-hidden="true"></i></a></li>
+						<li class="nav-item"><a class="nav-link" href="#"><i
+								class="fas fa-user-circle nav-item"></i>Elquetecuento</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+
+
+	<div class="container-fluid">
+
+		<div class="row pt-3">
+			<div class="col-6">
+				<span class="titulopagina"><span style="color: #138496">Presupuesto</span>/
+					New</span>
+			</div>
+
+		</div>
+		<br />
+		<div class="row pb-3" style="border-bottom: solid 2px lightgray;">
+			<div class="col-6">
+				<a type="button" class="btn btn-secondary boton1"
+					href="/presupuestos">Lista</a>
+
+			</div>
+		</div>
+
+		<div class="row justify-content-center"
+			style="background-color: #41464b;">
+			<div class="col-11 mt-3 mb-3"
+				style="background-color: white; border: solid 2px #f9fafb; border-radius: 10px;">
+				<div class="principal">
+					<div class="contenedor">
+						<div class="formulario" style="">
+							<div class="col">
+								<br>
+								<form id="formulario" action="/presupuesto" method="post">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputDatep"> <strong>Fecha
+													presupuesto</strong></label> <input type="text" class="form-control"
+												id="presDat" name="fechaPresupuesto" required> <small
+												id="presHelp" class="form-text text-muted"> <em>Escriba
+													la fecha del presupuesto.</em>
+											</small>
+										</div>
+										<br>
+										<div class="form-group col-md-6">
+											<label for="inputTotal"> <strong>Total</strong></label> 
+											<input type="number" class="form-control"
+												id="total" name="total" required> <small
+												id="totalHelp" class="form-text text-muted"> <em>
+													Escriba el Total del presupuesto.</em></small>
+										</div>
+										<br>
+										<div class="form-group col-md-6">
+											<label for="inputClient"> <strong>Cliente</strong></label> 
+											<select class="form-select"
+												id="codClient" name="codigocliente" required>
+												<option>Seleccione...</option>
+												<option th:each="cliente: ${clientes}" 
+													th:value="${cliente.codigocliente}" 
+													th:text="${cliente.nombrecliente}"></option>
+												</select>
+										</div>
+										<br>
+										<div class="form-group col-md-6">
+											<label for="inputComercial"> <strong>Comercial</strong></label> 
+												<select class="form-select"
+												id="codComercial" name="codigocomercial" required>
+												<option>Seleccione...</option>
+												<option th:each="comercial: ${comerciales}" 
+													th:value="${comercial.codigocomercial}" 
+													th:text="${comercial.nombrecomercial}"></option>
+												</select>
+										</div>
+										<br>
+										<div class="form-group col-md-6">
+											<label for="inputAct"> <strong>Actividad</strong></label> 
+											<select class="form-select" id="codAct" name="codigoactividad" required>
+												<option>Seleccione...</option>
+												<option th:each="actividad: ${actividades}" 
+													th:value="${actividad.codigoactividad}" 
+													th:text="${actividad.nombreactividad}"></option>
+												</select>
+										</div>
+										<br>
+										<div class="form-group col-md-6">
+											<label for="inputUsuario"> <strong>Estado</strong></label> 
+												<select class="form-select" id="codEst" name="codigoestado" required>
+												<option> Seleccione....</option>
+												<option th:each="estado: ${estados}" 
+													th:value="${estado.codigoestado}" 
+													th:text="${estado.nombreestado}"></option>
+												</select>
+										</div>
+										<br>
+									</div>
+									<button type="submit" class="btn btn-secondary boton1">Añadir</button>
+									<br>
+									<br>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
